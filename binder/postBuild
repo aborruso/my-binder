@@ -22,6 +22,7 @@ cd ~/.local/bin
 wget https://github.com/duckdb/duckdb/releases/download/v1.1.0/duckdb_cli-linux-amd64.zip
 unzip duckdb_cli-linux-amd64.zip
 chmod +x ./duckdb
+duckdb -c "INSTALL spatial;INSTALL httpfs;INSTALL json"
 
 # install scrape-cli
 cd ~/.local/bin
