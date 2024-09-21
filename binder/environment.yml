@@ -13,6 +13,8 @@ dependencies:
   - ipython-sql
   - chardet
   - pip
+  - gdal  # Include GDAL per Fiona
+  - fiona  # Aggiungi Fiona per la CLI e l'uso in Python
   - pip:
     - bash_kernel
     - yq
