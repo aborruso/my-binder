@@ -15,6 +15,7 @@ dependencies:
   - pip
   - gdal  # Include GDAL per Fiona
   - fiona  # Aggiungi Fiona per la CLI e l'uso in Python
+# rebuild
   - pip:
     - bash_kernel
     - yq
