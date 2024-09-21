@@ -3,6 +3,9 @@
 # to install bash kernel
 python -m bash_kernel.install
 
+# install fx
+curl https://fx.wtf/install.sh | sh
+
 # Install Zsh and Oh My Zsh
 apt-get update && apt-get install --yes zsh
 
