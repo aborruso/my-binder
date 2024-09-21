@@ -1,0 +1,22 @@
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11.2
+  - matplotlib
+  - pandas
+  - altair
+  - notebook
+  - lxml
+  - csvkit
+  - httpie
+  - ipywidgets
+  - ipython-sql
+  - chardet
+  - pip:
+    - bash_kernel
+    - yq
+    - requests-html
+    - csvs-to-sqlite
+    - goodtables
+    - daff
+    - visidata
