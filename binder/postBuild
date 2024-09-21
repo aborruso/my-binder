@@ -3,11 +3,13 @@
 # to install bash kernel
 python -m bash_kernel.install
 
-# install fx
-curl https://fx.wtf/install.sh | sh
-
 # to create a folder that is in the PATH
 mkdir -p ~/.local/bin
+
+# install fx
+cd ~/.local/bin
+curl https://fx.wtf/install.sh | sh
+chmod +x ./fx
 
 # install Miller
 cd ~/.local/bin
