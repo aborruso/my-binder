@@ -1,6 +1,5 @@
 autoconf
 jq
-miller
 zsh
 xmlstarlet
 libxml2-dev
