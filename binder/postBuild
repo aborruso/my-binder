@@ -24,6 +24,15 @@ unzip duckdb_cli-linux-amd64.zip
 chmod +x ./duckdb
 duckdb -c "INSTALL spatial;INSTALL httpfs;INSTALL json"
 
+# Crea il file ~/.duckdbrc e scrivi le configurazioni desiderate
+cat <<EOL > ~/.duckdbrc
+.timer on
+.width 180
+LOAD json;
+LOAD parquet;
+LOAD spatial;
+EOL
+
 # install scrape-cli
 cd ~/.local/bin
 wget https://github.com/aborruso/scrape-cli/releases/download/v1.0/scrape
