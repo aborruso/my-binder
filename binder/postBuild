@@ -51,13 +51,11 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # Enable plugins in the .zshrc file
 sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
 
-# Set Zsh as the default shell for the Jupyter user
-chsh -s $(which zsh) ${NB_USER}
+# Create a .bashrc file to automatically start Zsh
+echo "exec zsh" >> ~/.bashrc
 
-# Create a .bash_profile file to automatically start Zsh
-echo "exec zsh" > ~/.bash_profile
-
-# Optional: Set Zsh as the default shell for root as well
-chsh -s $(which zsh) root
+# Set Zsh as the default shell for Jupyter terminal
+mkdir -p ~/.jupyter
+echo "c.NotebookApp.terminado_settings = { 'shell_command': ['/bin/zsh'] }" >> ~/.jupyter/jupyter_notebook_config.py
 
 # You can start zsh manually later, or add a note to users to run 'zsh' in the terminal.
