@@ -12,9 +12,9 @@ python -m bash_kernel.install
 mkdir -p ~/.local/bin
 
 # install fx
-cd ~/.local/bin
-curl https://fx.wtf/install.sh | sh
-chmod +x ./fx
+# cd ~/.local/bin
+# curl https://fx.wtf/install.sh | sh
+# chmod +x ./fx
 
 # install Miller
 cd ~/.local/bin
