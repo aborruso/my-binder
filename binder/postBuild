@@ -58,6 +58,6 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
 
 # set zsh as default shell
-chsh -s /path/to/zsh
+# chsh -s /path/to/zsh
 
 # You can start zsh manually later, or add a note to users to run 'zsh' in the terminal.
