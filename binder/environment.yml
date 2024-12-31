@@ -25,3 +25,4 @@ dependencies:
     - daff
     - visidata
     - scrape-cli
+    - llm
