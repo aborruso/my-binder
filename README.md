@@ -1,8 +1,8 @@
 # Andy's Data Analysis Notebook
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aborruso/my-binder/HEAD)
-[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/aborruso/data-analysis-env?label=Docker%20Hub)](https://hub.docker.com/r/aborruso/data-analysis-env)
-[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/aborruso/data-analysis-env?label=image%20size)](https://hub.docker.com/r/aborruso/data-analysis-env)
+[![Docker Pulls](https://img.shields.io/docker/pulls/aborruso/data-analysis-env?label=Docker%20Hub)](https://hub.docker.com/r/aborruso/data-analysis-env)
+[![Docker Image Size](https://img.shields.io/docker/image-size/aborruso/data-analysis-env/latest?label=image%20size)](https://hub.docker.com/r/aborruso/data-analysis-env)
 
 ## About this Environment
 
