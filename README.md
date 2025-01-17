@@ -6,6 +6,28 @@
 
 ## About this Environment
 
+### Important Note on GitHub Codespaces Costs
+
+GitHub Codespaces offers free usage up to a certain limit:
+- 120 core-hours/month on 2-core machines
+- 60 core-hours/month on 4-core machines
+- 30 core-hours/month on 8-core machines
+
+After exceeding these limits, the user who runs the Codespace will be charged:
+- 2-core: $0.18/hour
+- 4-core: $0.36/hour
+- 8-core: $0.72/hour
+- 16-core: $1.44/hour
+- 32-core: $2.88/hour
+
+Storage costs:
+- First 30GB: Free
+- Additional storage: $0.07/GB/month
+
+This environment is configured to use a 4-core machine by default. You can change the machine type in the Codespace settings to reduce costs.
+
+### Ways to Run this Environment
+
 This project provides two ways to run the data analysis environment:
 1. **Binder** - Cloud-based, no installation required
 2. **Docker** - Local container for better performance and customization
