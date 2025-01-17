@@ -44,18 +44,24 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Installare curl e wget prima di scaricare Miniconda
+# Installare curl, wget e ca-certificates prima di scaricare Miniconda
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     wget \
-    && rm -rf /var/lib/apt/lists/*
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/* && \
+    update-ca-certificates
+
+# Creare directory temporanea con permessi corretti
+RUN mkdir -p /tmp && chmod 1777 /tmp
 
 # Scaricare Miniconda in modo più sicuro con curl e verificare il file
 RUN curl -fsSL -o /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     chmod +x /tmp/miniconda.sh && \
     ls -lah /tmp/miniconda.sh && \
     /bin/bash /tmp/miniconda.sh -b -p /opt/conda && \
-    rm -rf /tmp/miniconda.sh
+    rm -rf /tmp/miniconda.sh && \
+    chmod -R 755 /opt/conda
 
 # Aggiungere Miniconda al PATH
 ENV PATH="/opt/conda/bin:$PATH"
