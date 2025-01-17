@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libtool \
     flex \
     build-essential \
+    curl \
     wget \
     libproj-dev \
     libgeos-dev \
@@ -43,8 +44,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgdal-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Installare wget se non è presente
-RUN apt-get update && apt-get install -y wget && rm -rf /var/lib/apt/lists/*
+# Installare curl e wget prima di scaricare Miniconda
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
 
 # Scaricare Miniconda in modo più sicuro con curl e verificare il file
 RUN curl -fsSL -o /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
