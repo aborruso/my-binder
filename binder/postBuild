@@ -5,70 +5,152 @@ set -e
 set -u
 set -o pipefail
 
-# to install bash kernel
-python -m bash_kernel.install
+# Function to check if command exists
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
 
-# to create a folder that is in the PATH
+# Create local bin directory if it doesn't exist
 mkdir -p ~/.local/bin
+export PATH="$HOME/.local/bin:$PATH"
 
-# install fx
-cd ~/.local/bin
-wget https://github.com/antonmedv/fx/releases/download/35.0.0/fx_linux_amd64
-mv fx_linux_amd64 fx
-chmod +x ./fx
+# Install bash kernel with error handling
+if ! python -m bash_kernel.install; then
+    echo "Failed to install bash kernel" >&2
+    exit 1
+fi
 
-# install Miller
-cd ~/.local/bin
-wget https://github.com/johnkerl/miller/releases/download/v6.12.0/miller-6.12.0-linux-amd64.tar.gz
-tar --strip-components=1 -xzf miller-6.12.0-linux-amd64.tar.gz
-chmod +x ./mlr
+# Install debugging and profiling tools
+echo "Installing debugging tools..."
+apt-get update && apt-get install --yes \
+    htop \
+    strace \
+    ltrace \
+    lsof \
+    ncdu \
+    tree \
+    jq \
+    ripgrep \
+    bat \
+    fd-find \
+    exa
 
-# install duckdb
-cd ~/.local/bin
-wget https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-amd64.zip
-unzip duckdb_cli-linux-amd64.zip
-chmod +x ./duckdb
-duckdb -c "INSTALL spatial;INSTALL httpfs;INSTALL json"
+# Install fx with error handling
+echo "Installing fx..."
+if ! (cd ~/.local/bin && \
+    wget -q https://github.com/antonmedv/fx/releases/download/35.0.0/fx_linux_amd64 && \
+    mv fx_linux_amd64 fx && \
+    chmod +x ./fx); then
+    echo "Failed to install fx" >&2
+    exit 1
+fi
 
-# Crea il file ~/.duckdbrc e scrivi le configurazioni desiderate
-cat <<EOL > ~/.duckdbrc
+# Install Miller with error handling
+echo "Installing Miller..."
+if ! (cd ~/.local/bin && \
+    wget -q https://github.com/johnkerl/miller/releases/download/v6.12.0/miller-6.12.0-linux-amd64.tar.gz && \
+    tar --strip-components=1 -xzf miller-6.12.0-linux-amd64.tar.gz && \
+    chmod +x ./mlr); then
+    echo "Failed to install Miller" >&2
+    exit 1
+fi
+
+# Install DuckDB with error handling
+echo "Installing DuckDB..."
+if ! (cd ~/.local/bin && \
+    wget -q https://github.com/duckdb/duckdb/releases/download/v1.1.3/duckdb_cli-linux-amd64.zip && \
+    unzip duckdb_cli-linux-amd64.zip && \
+    chmod +x ./duckdb && \
+    duckdb -c "INSTALL spatial;INSTALL httpfs;INSTALL json"); then
+    echo "Failed to install DuckDB" >&2
+    exit 1
+fi
+
+# Create DuckDB config with error handling
+echo "Configuring DuckDB..."
+if ! cat <<EOL > ~/.duckdbrc
 .timer on
 .width 180
 LOAD json;
 LOAD parquet;
 LOAD spatial;
 EOL
+then
+    echo "Failed to create DuckDB config" >&2
+    exit 1
+fi
 
-# install scrape-cli
-# cd ~/.local/bin
-# wget https://github.com/aborruso/scrape-cli/releases/download/v1.0/scrape
-# chmod +x ./scrape
+# Install code quality tools
+echo "Installing code quality tools..."
+pip install --user \
+    black \
+    isort \
+    flake8 \
+    mypy \
+    pylint \
+    bandit \
+    safety
 
-# Install Zsh and Oh My Zsh
-apt-get update && apt-get install --yes zsh
+# Install Zsh and Oh My Zsh with error handling
+echo "Installing Zsh and Oh My Zsh..."
+if ! (apt-get update && apt-get install --yes zsh); then
+    echo "Failed to install Zsh" >&2
+    exit 1
+fi
 
-# Install Oh My Zsh silently
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+# Install Oh My Zsh silently with error handling
+echo "Installing Oh My Zsh..."
+if ! sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; then
+    echo "Failed to install Oh My Zsh" >&2
+    exit 1
+fi
 
-# Optional: install plugins for Oh My Zsh
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# Install Oh My Zsh plugins with error handling
+echo "Installing Oh My Zsh plugins..."
+if ! (git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions); then
+    echo "Failed to install Oh My Zsh plugins" >&2
+    exit 1
+fi
 
-# Enable plugins in the .zshrc file
-sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
+# Configure .zshrc with error handling
+echo "Configuring .zshrc..."
+if ! sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc; then
+    echo "Failed to configure .zshrc" >&2
+    exit 1
+fi
 
 # set zsh as default shell
 # chsh -s /path/to/zsh
 
 # You can start zsh manually later, or add a note to users to run 'zsh' in the terminal.
 
-# install uv
-curl -LsSf https://astral.sh/uv/install.sh | sh
+# Install uv with error handling
+echo "Installing uv..."
+if ! curl -LsSf https://astral.sh/uv/install.sh | sh; then
+    echo "Failed to install uv" >&2
+    exit 1
+fi
 
-# install llm plugins
-llm install llm-groq
-llm install llm-mistral
+# Install llm plugins with error handling
+echo "Installing llm plugins..."
+if ! (llm install llm-groq && llm install llm-mistral); then
+    echo "Failed to install llm plugins" >&2
+    exit 1
+fi
 
-# install playwright
+# Install Playwright with error handling
+echo "Installing Playwright..."
+if ! shot-scraper install -b chromium; then
+    echo "Failed to install Playwright" >&2
+    exit 1
+fi
 
-shot-scraper install -b chromium
+# Final message
+echo "Setup completed successfully!"
+echo "Useful commands:"
+echo "  htop - system monitoring"
+echo "  rg - ripgrep for fast searching"
+echo "  bat - better cat"
+echo "  fd - better find"
+echo "  exa - better ls"
