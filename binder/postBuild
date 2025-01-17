@@ -5,6 +5,10 @@ set -e
 set -u
 set -o pipefail
 
+# Debug: Show all environment variables
+echo "Environment variables:"
+printenv | sort
+
 # Check if running on a JupyterHub service (mybinder.org, GESIS Notebooks, or other JupyterHub)
 if [[ -n "${JUPYTERHUB_SERVICE_PREFIX:-}" || -n "${JUPYTERHUB_API_URL:-}" || -n "${JUPYTERHUB_HOST:-}" || -d /usr/local/bin/jupyterhub-singleuser ]]; then
     echo "Running on JupyterHub service - optimizing for container reuse"
