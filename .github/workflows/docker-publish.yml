@@ -3,7 +3,11 @@ name: Build e Push Docker
 on:
   push:
     branches:
-      - main  # Esegui il build quando fai push su main
+      - main
+    paths:
+      - 'Dockerfile'
+      - 'binder/**'
+      - '.github/workflows/docker-publish.yml'
 
 jobs:
   build-and-push:
