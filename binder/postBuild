@@ -5,13 +5,13 @@ set -e
 set -u
 set -o pipefail
 
-# Check if running on mybinder.org
-if [[ -n "${JUPYTERHUB_SERVICE_PREFIX:-}" ]]; then
-    echo "Running on mybinder.org - optimizing for container reuse"
+# Check if running on a JupyterHub service (mybinder.org or GESIS Notebooks)
+if [[ -n "${JUPYTERHUB_SERVICE_PREFIX:-}" || -n "${JUPYTERHUB_API_URL:-}" ]]; then
+    echo "Running on JupyterHub service - optimizing for container reuse"
     # Move frequently changing steps to the end
     export BINDER_OPTIMIZED=true
 else
-    echo "Not running on mybinder.org - using standard setup"
+    echo "Running in local environment - using standard setup"
     export BINDER_OPTIMIZED=false
 fi
 
