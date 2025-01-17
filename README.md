@@ -2,6 +2,7 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aborruso/my-binder/HEAD)
 [![Docker Image Size](https://img.shields.io/docker/image-size/aborruso/data-analysis-env/latest?label=image%20size)](https://hub.docker.com/r/aborruso/data-analysis-env)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=YOUR_REPO_ID&machine=basicLinux32gb&devcontainer_path=.devcontainer%2Fdevcontainer.json)
 
 ## About this Environment
 
