@@ -10,7 +10,8 @@ echo "Environment variables:"
 printenv | sort
 
 # Check if running on a JupyterHub service (mybinder.org, GESIS Notebooks, or other JupyterHub)
-if [[ -n "${JUPYTERHUB_SERVICE_PREFIX:-}" || -n "${JUPYTERHUB_API_URL:-}" || -n "${JUPYTERHUB_HOST:-}" || -d /usr/local/bin/jupyterhub-singleuser ]]; then
+# Added check for /home/jovyan which is the standard JupyterHub user home
+if [[ -n "${JUPYTERHUB_SERVICE_PREFIX:-}" || -n "${JUPYTERHUB_API_URL:-}" || -n "${JUPYTERHUB_HOST:-}" || -d /usr/local/bin/jupyterhub-singleuser || "$HOME" == "/home/jovyan" ]]; then
     echo "Running on JupyterHub service - optimizing for container reuse"
     # Move frequently changing steps to the end
     export BINDER_OPTIMIZED=true
