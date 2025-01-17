@@ -26,3 +26,6 @@ dependencies:
     - visidata
     - scrape-cli
     - llm
+    - shot-scraper
+    - ttok
+    - strip-tags
