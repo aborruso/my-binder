@@ -36,6 +36,18 @@ Binder is a service that allows you to create custom, shareable computing enviro
 4. All tools are pre-installed and ready to use
 
 #### Docker
+
+##### Using Pre-built Image
+1. Pull the latest image:
+   ```bash
+   docker pull aborruso/data-analysis-env:latest
+   ```
+2. Run the container:
+   ```bash
+   docker run -p 8888:8888 -v $(pwd):/workspace aborruso/data-analysis-env
+   ```
+
+##### Building Locally
 1. Build the Docker image:
    ```bash
    docker build -t data-analysis-env .
@@ -44,7 +56,8 @@ Binder is a service that allows you to create custom, shareable computing enviro
    ```bash
    docker run -p 8888:8888 -v $(pwd):/workspace data-analysis-env
    ```
-3. Access JupyterLab at http://localhost:8888
+
+3. In both cases, access JupyterLab at http://localhost:8888
 4. Your local files will be available in the /workspace directory
 
 ### Included Tools:
