@@ -40,24 +40,6 @@ apt-get update && apt-get install -y \
     libgdal-dev \
     parallel
 
-# Install Python tools
-echo "Installing Python tools..."
-pip install --upgrade pip
-pip install \
-    pandas \
-    numpy \
-    scipy \
-    matplotlib \
-    seaborn \
-    plotnine \
-    jupyterlab \
-    ipython \
-    black \
-    isort \
-    flake8 \
-    mypy \
-    pylint \
-    uv
 
 # Install CLI tools
 echo "Installing CLI tools..."
