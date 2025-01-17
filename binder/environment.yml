@@ -1,21 +1,44 @@
 channels:
   - conda-forge
 dependencies:
+  # Core Python
   - python=3.11.2
-  - matplotlib
+  - pip
+  
+  # Data analysis
   - pandas
+  - numpy
+  - scipy
+  - matplotlib
+  - seaborn
   - altair
+  - statsmodels
+  
+  # Geospatial
+  - gdal
+  - fiona
+  - geopandas
+  - shapely
+  
+  # Notebook & Visualization
   - notebook
-  - lxml
-  - csvkit
-  - httpie
   - ipywidgets
   - ipython-sql
+  - jupyterlab
+  
+  # Data processing
+  - csvkit
+  - lxml
   - chardet
-  - pip
-  - gdal  # Include GDAL per Fiona
-  - fiona  # Aggiungi Fiona per la CLI e l'uso in Python
-# rebuild
+  - openpyxl
+  
+  # Web & APIs
+  - httpie
+  - requests
+  - beautifulsoup4
+  - selenium
+  
+  # Pip packages
   - pip:
     - bash_kernel
     - yq
@@ -29,3 +52,5 @@ dependencies:
     - shot-scraper
     - ttok
     - strip-tags
+    - pandas-profiling
+    - pyarrow  # For better pandas performance
