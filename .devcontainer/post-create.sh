@@ -49,6 +49,7 @@ pip install \
     scipy \
     matplotlib \
     seaborn \
+    plotnine \
     jupyterlab \
     ipython \
     black \

@@ -13,6 +13,7 @@ dependencies:
   - seaborn
   - altair
   - statsmodels
+  - plotnine
   
   # Geospatial
   - gdal
