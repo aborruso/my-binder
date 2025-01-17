@@ -91,34 +91,18 @@ pip install --user \
     bandit \
     safety
 
-# Install Zsh and Oh My Zsh with error handling
-echo "Installing Zsh and Oh My Zsh..."
-if ! (apt-get update && apt-get install --yes zsh); then
-    echo "Failed to install Zsh" >&2
-    exit 1
-fi
+# Install Zsh and Oh My Zsh
+apt-get update && apt-get install --yes zsh
 
-# Install Oh My Zsh silently with error handling
-echo "Installing Oh My Zsh..."
-if ! sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended; then
-    echo "Failed to install Oh My Zsh" >&2
-    exit 1
-fi
+# Install Oh My Zsh silently
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-# Install Oh My Zsh plugins with error handling
-echo "Installing Oh My Zsh plugins..."
-if ! (git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions); then
-    echo "Failed to install Oh My Zsh plugins" >&2
-    exit 1
-fi
+# Optional: install plugins for Oh My Zsh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-# Configure .zshrc with error handling
-echo "Configuring .zshrc..."
-if ! sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc; then
-    echo "Failed to configure .zshrc" >&2
-    exit 1
-fi
+# Enable plugins in the .zshrc file
+sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
 
 # set zsh as default shell
 # chsh -s /path/to/zsh
