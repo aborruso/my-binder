@@ -5,8 +5,8 @@ set -e
 set -u
 set -o pipefail
 
-# Check if running on a JupyterHub service (mybinder.org or GESIS Notebooks)
-if [[ -n "${JUPYTERHUB_SERVICE_PREFIX:-}" || -n "${JUPYTERHUB_API_URL:-}" ]]; then
+# Check if running on a JupyterHub service (mybinder.org, GESIS Notebooks, or other JupyterHub)
+if [[ -n "${JUPYTERHUB_SERVICE_PREFIX:-}" || -n "${JUPYTERHUB_API_URL:-}" || -n "${JUPYTERHUB_HOST:-}" || -d /usr/local/bin/jupyterhub-singleuser ]]; then
     echo "Running on JupyterHub service - optimizing for container reuse"
     # Move frequently changing steps to the end
     export BINDER_OPTIMIZED=true
