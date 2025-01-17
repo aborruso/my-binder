@@ -103,3 +103,25 @@ chmod +x /usr/local/bin/monitor-resources
 
 echo "Development environment setup complete!"
 echo "You can check system resources with: monitor-resources"
+#!/bin/bash
+set -e
+
+echo "Fixing permissions..."
+sudo chown -R vscode:vscode /var/lib/apt/lists/partial
+
+echo "Updating package lists..."
+sudo apt-get update
+
+echo "Installing basic dependencies..."
+sudo apt-get install -y \
+    build-essential \
+    curl \
+    git \
+    zsh
+
+echo "Setting up Oh My Zsh..."
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+echo "Environment setup complete!"
