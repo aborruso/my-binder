@@ -5,20 +5,12 @@ set -e
 set -u
 set -o pipefail
 
-# Check if we need to rebuild
-CACHE_FILE="/tmp/.binder_build_cache"
-CURRENT_HASH=$(git rev-parse HEAD:./)
-
-if [ -f "$CACHE_FILE" ]; then
-    CACHED_HASH=$(cat "$CACHE_FILE")
-    if [ "$CURRENT_HASH" == "$CACHED_HASH" ]; then
-        echo "No significant changes detected. Using cached environment."
-        exit 0
-    fi
+# Check if running on mybinder.org
+if [[ -n "$JUPYTERHUB_SERVICE_PREFIX" ]]; then
+    echo "Running on mybinder.org - optimizing for container reuse"
+    # Move frequently changing steps to the end
+    export BINDER_OPTIMIZED=true
 fi
-
-# Save current hash
-echo "$CURRENT_HASH" > "$CACHE_FILE"
 
 # Function to check if command exists
 command_exists() {
@@ -35,8 +27,8 @@ if ! python -m bash_kernel.install; then
     exit 1
 fi
 
-# Install debugging and profiling tools
-echo "Installing debugging tools..."
+# Install core tools that rarely change first
+echo "Installing core tools..."
 apt-get update && apt-get install --yes \
     htop \
     strace \
@@ -45,10 +37,7 @@ apt-get update && apt-get install --yes \
     ncdu \
     tree \
     jq \
-    ripgrep \
-    bat \
-    fd-find \
-    exa
+    ripgrep
 
 # Install fx with error handling
 echo "Installing fx..."
@@ -95,16 +84,18 @@ then
     exit 1
 fi
 
-# Install code quality tools
-echo "Installing code quality tools..."
-pip install --user \
-    black \
-    isort \
-    flake8 \
-    mypy \
-    pylint \
-    bandit \
-    safety
+# Install code quality tools (move to end if on mybinder.org)
+if [[ -z "$BINDER_OPTIMIZED" ]]; then
+    echo "Installing code quality tools..."
+    pip install --user \
+        black \
+        isort \
+        flake8 \
+        mypy \
+        pylint \
+        bandit \
+        safety
+fi
 
 # Install Zsh and Oh My Zsh
 apt-get update && apt-get install --yes zsh
