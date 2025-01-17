@@ -6,10 +6,13 @@ set -u
 set -o pipefail
 
 # Check if running on mybinder.org
-if [[ -n "$JUPYTERHUB_SERVICE_PREFIX" ]]; then
+if [[ -n "${JUPYTERHUB_SERVICE_PREFIX:-}" ]]; then
     echo "Running on mybinder.org - optimizing for container reuse"
     # Move frequently changing steps to the end
     export BINDER_OPTIMIZED=true
+else
+    echo "Not running on mybinder.org - using standard setup"
+    export BINDER_OPTIMIZED=false
 fi
 
 # Function to check if command exists
