@@ -5,6 +5,21 @@ set -e
 set -u
 set -o pipefail
 
+# Check if we need to rebuild
+CACHE_FILE="/tmp/.binder_build_cache"
+CURRENT_HASH=$(git rev-parse HEAD:./)
+
+if [ -f "$CACHE_FILE" ]; then
+    CACHED_HASH=$(cat "$CACHE_FILE")
+    if [ "$CURRENT_HASH" == "$CACHED_HASH" ]; then
+        echo "No significant changes detected. Using cached environment."
+        exit 0
+    fi
+fi
+
+# Save current hash
+echo "$CURRENT_HASH" > "$CACHE_FILE"
+
 # Function to check if command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
