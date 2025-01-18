@@ -6,11 +6,15 @@
         "memory": "8gb",
         "storage": "32gb"
     },
-    "forwardPorts": [8888],
+    "forwardPorts": [8888, 5000],
     "portsAttributes": {
         "8888": {
             "label": "JupyterLab",
             "onAutoForward": "openPreview"
+        },
+        "5000": {
+            "label": "Flask App",
+            "onAutoForward": "notify"
         }
     },
     "updateContentCommand": "echo 'Updating environment...' && bash .devcontainer/post-create.sh",
@@ -23,9 +27,12 @@
         "ghcr.io/devcontainers/features/docker-in-docker:1": {
             "version": "latest",
             "moby": true
-        }
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/common-utils:1": {}
     },
-    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    "postCreateCommand": "bash .devcontainer/post-create.sh && pip install --user -r requirements.txt",
+    "remoteUser": "vscode",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -41,39 +48,6 @@
                 "yzhang.markdown-all-in-one",
                 "streetsidesoftware.code-spell-checker"
             ]
-        }
-    }
-}
-{
-    "name": "Dev Container",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-    "features": {
-        "ghcr.io/devcontainers/features/common-utils:1": {}
-    },
-    "postCreateCommand": "bash .devcontainer/post-create.sh",
-    "remoteUser": "vscode"
-}
-{
-    "name": "Python Development",
-    "image": "mcr.microsoft.com/devcontainers/python:3.11",
-    "features": {
-        "ghcr.io/devcontainers/features/github-cli:1": {},
-        "ghcr.io/devcontainers/features/common-utils:1": {}
-    },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "ms-python.python",
-                "ms-python.vscode-pylance"
-            ]
-        }
-    },
-    "postCreateCommand": "pip install --user -r requirements.txt",
-    "forwardPorts": [5000],
-    "portsAttributes": {
-        "5000": {
-            "label": "Flask App",
-            "onAutoForward": "notify"
         }
     }
 }
