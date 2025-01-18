@@ -1,14 +1,7 @@
-name: Build e Push Docker
+name: Build and Push Docker (Manual)
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'Dockerfile'
-      - 'binder/**'
-      - '.github/workflows/docker-publish.yml'
-      - '!README.md'
+  workflow_dispatch:
 
 jobs:
   build-and-push:
