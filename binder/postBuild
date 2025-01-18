@@ -144,17 +144,6 @@ if ! shot-scraper install -b chromium; then
     exit 1
 fi
 
-# Clone lavagna branch content
-echo "Copying lavagna content..."
-TEMP_DIR=$(mktemp -d)
-git clone --branch lavagna --single-branch --depth 1 https://github.com/aborruso/my-binder.git $TEMP_DIR
-
-# Copy only the data, notebook and script folders
-cp -r $TEMP_DIR/{data,notebook,script} .
-
-# Clean up
-rm -rf $TEMP_DIR
-
 # Final message
 echo "Setup completed successfully!"
 echo "Useful commands:"
