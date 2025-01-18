@@ -44,7 +44,6 @@ apt-get update && apt-get install -y \
 # Install CLI tools
 echo "Installing CLI tools..."
 curl -LsSf https://astral.sh/uv/install.sh | sh
-curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash -s -- --unattended
 
 # Install DuckDB
 echo "Installing DuckDB..."
@@ -83,13 +82,6 @@ echo "Installing Playwright..."
 pip install playwright
 playwright install chromium
 
-# Install Oh My Zsh plugins
-echo "Configuring Zsh..."
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# Configure zsh
-sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
 
 # Create resource monitoring script
 echo "Creating resource monitoring..."
@@ -119,9 +111,5 @@ sudo apt-get install -y \
     git \
     zsh
 
-echo "Setting up Oh My Zsh..."
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
 
 echo "Environment setup complete!"
