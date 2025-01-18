@@ -144,13 +144,13 @@ if ! shot-scraper install -b chromium; then
     exit 1
 fi
 
-# Clone palestra branch content
-echo "Copying palestra content..."
+# Clone lavagna branch content
+echo "Copying lavagna content..."
 TEMP_DIR=$(mktemp -d)
-git clone --branch palestra --single-branch https://github.com/aborruso/my-binder.git $TEMP_DIR
+git clone --branch lavagna --single-branch --depth 1 https://github.com/aborruso/my-binder.git $TEMP_DIR
 
-# Copy only the palestra folder structure
-cp -r $TEMP_DIR/palestra/{notebook,data,script} .
+# Copy only the data, notebook and script folders
+cp -r $TEMP_DIR/{data,notebook,script} .
 
 # Clean up
 rm -rf $TEMP_DIR

@@ -7,6 +7,14 @@
 
 This project provides a comprehensive data analysis environment with two ways to run it:
 
+### Lavagna Branch
+The `lavagna` branch is an orphan branch containing only teaching materials:
+- `notebook/` - Jupyter notebooks for lessons
+- `data/` - Example datasets
+- `script/` - Utility scripts
+
+This branch is completely separate from the main codebase and can be updated independently.
+
 1. **Binder** - Cloud-based, no installation required
 2. **Docker** - Local container for better performance and customization
 
