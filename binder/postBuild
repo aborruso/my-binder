@@ -29,10 +29,22 @@ command_exists() {
 mkdir -p ~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 
-# Install bash kernel with error handling
-if ! python -m bash_kernel.install; then
-    echo "Failed to install bash kernel" >&2
-    exit 1
+# Install sqlite3 system package first
+apt-get update && apt-get install --yes libsqlite3-dev
+
+# Install bash kernel with better error handling and debugging
+echo "Attempting to install bash kernel..."
+if python -m bash_kernel.install; then
+    echo "Bash kernel installed successfully"
+else
+    echo "Warning: Failed to install bash kernel through pip, trying alternative method..."
+    # Try installing directly from conda-forge
+    if conda install -c conda-forge bash_kernel -y; then
+        echo "Bash kernel installed successfully via conda-forge"
+    else
+        echo "Error: Could not install bash kernel through either pip or conda"
+        echo "This is non-fatal - continuing with other setup steps"
+    fi
 fi
 
 # Install core tools that rarely change first
