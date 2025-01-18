@@ -32,6 +32,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # Install sqlite3 system package first
 apt-get update && apt-get install --yes libsqlite3-dev
 
+# Install Python SQLite dependencies
+pip install --user pysqlite3 sqlean.py
+
 # Install bash kernel with better error handling and debugging
 echo "Attempting to install bash kernel..."
 if python -m bash_kernel.install; then
