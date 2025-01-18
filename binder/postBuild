@@ -37,12 +37,12 @@ fi
 
 # Fix permissions for apt lists
 echo "Fixing apt permissions..."
-sudo mkdir -p /var/lib/apt/lists/partial
-sudo chmod -R 755 /var/lib/apt/lists
+mkdir -p /var/lib/apt/lists/partial
+chmod -R 755 /var/lib/apt/lists
 
 # Install core tools that rarely change first
 echo "Installing core tools..."
-sudo apt-get update && sudo apt-get install --yes \
+apt-get update && apt-get install --yes \
     htop \
     strace \
     ltrace \
