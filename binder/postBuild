@@ -144,17 +144,16 @@ if ! shot-scraper install -b chromium; then
     exit 1
 fi
 
-# Copy palestra folder structure if it doesn't exist
-if [[ ! -d "notebook" && ! -d "data" && ! -d "script" ]]; then
-    echo "Creating palestra folder structure..."
-    mkdir -p notebook data script
-    
-    echo "Creating example files..."
-    echo "# Example Notebook" > notebook/example.ipynb
-    echo "Hello World from data!" > data/hello.txt
-    echo "#!/bin/bash\necho 'Hello World from script!'" > script/hello.sh
-    chmod +x script/hello.sh
-fi
+# Clone palestra branch content
+echo "Copying palestra content..."
+TEMP_DIR=$(mktemp -d)
+git clone --branch palestra --single-branch https://github.com/aborruso/my-binder.git $TEMP_DIR
+
+# Copy only the palestra folder structure
+cp -r $TEMP_DIR/palestra/{notebook,data,script} .
+
+# Clean up
+rm -rf $TEMP_DIR
 
 # Final message
 echo "Setup completed successfully!"
