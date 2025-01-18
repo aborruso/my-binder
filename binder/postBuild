@@ -144,6 +144,18 @@ if ! shot-scraper install -b chromium; then
     exit 1
 fi
 
+# Copy palestra folder structure if it doesn't exist
+if [[ ! -d "notebook" && ! -d "data" && ! -d "script" ]]; then
+    echo "Creating palestra folder structure..."
+    mkdir -p notebook data script
+    
+    echo "Creating example files..."
+    echo "# Example Notebook" > notebook/example.ipynb
+    echo "Hello World from data!" > data/hello.txt
+    echo "#!/bin/bash\necho 'Hello World from script!'" > script/hello.sh
+    chmod +x script/hello.sh
+fi
+
 # Final message
 echo "Setup completed successfully!"
 echo "Useful commands:"
@@ -152,3 +164,8 @@ echo "  rg - ripgrep for fast searching"
 echo "  bat - better cat"
 echo "  fd - better find"
 echo "  exa - better ls"
+echo ""
+echo "Folder structure created:"
+echo "  notebook/ - for Jupyter notebooks"
+echo "  data/ - for datasets and files"
+echo "  script/ - for shell scripts"
