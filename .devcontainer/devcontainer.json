@@ -2,9 +2,9 @@
     "name": "Data Analysis Environment",
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "hostRequirements": {
-        "cpus": 4,
-        "memory": "8gb",
-        "storage": "32gb"
+        "cpus": 2,
+        "memory": "4gb",
+        "storage": "16gb"
     },
     "forwardPorts": [8888, 5000],
     "portsAttributes": {
