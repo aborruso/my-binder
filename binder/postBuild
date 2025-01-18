@@ -35,9 +35,14 @@ if ! python -m bash_kernel.install; then
     exit 1
 fi
 
+# Fix permissions for apt lists
+echo "Fixing apt permissions..."
+sudo mkdir -p /var/lib/apt/lists/partial
+sudo chmod -R 755 /var/lib/apt/lists
+
 # Install core tools that rarely change first
 echo "Installing core tools..."
-apt-get update && apt-get install --yes \
+sudo apt-get update && sudo apt-get install --yes \
     htop \
     strace \
     ltrace \
