@@ -41,7 +41,8 @@ apt-get update && apt-get install --yes \
     ripgrep \
     sqlite3 \
     libsqlite3-dev \
-    zsh
+    zsh \
+    git
 
 # Install bash kernel with better error handling and debugging
 echo "Attempting to install bash kernel..."
@@ -116,27 +117,37 @@ pip install --user \
     bandit \
     safety
 
-# Install Oh My Zsh only if zsh is installed
+# Install and configure zsh
 if command -v zsh >/dev/null 2>&1; then
     echo "Installing Oh My Zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     
-    # Optional: install plugins for Oh My Zsh
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    # Ensure .zshrc exists
+    if [ ! -f ~/.zshrc ]; then
+        echo "Creating .zshrc file..."
+        touch ~/.zshrc
+        echo "# Created by postBuild script" > ~/.zshrc
+    fi
     
-    # Enable plugins in the .zshrc file
-    sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
+    # Install plugins only if Oh My Zsh was installed successfully
+    if [ -d ~/.oh-my-zsh ]; then
+        echo "Installing Oh My Zsh plugins..."
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+        
+        # Enable plugins in the .zshrc file
+        if grep -q "plugins=" ~/.zshrc; then
+            sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
+        else
+            echo 'plugins=(git zsh-syntax-highlighting zsh-autosuggestions)' >> ~/.zshrc
+        fi
+    else
+        echo "Warning: Oh My Zsh installation failed - skipping plugin installation"
+    fi
 else
-    echo "Warning: zsh not found - skipping Oh My Zsh installation"
+    echo "Error: zsh not found - please install zsh first"
+    exit 1
 fi
-
-# Optional: install plugins for Oh My Zsh
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-# Enable plugins in the .zshrc file
-sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
 
 # set zsh as default shell
 # chsh -s /path/to/zsh
