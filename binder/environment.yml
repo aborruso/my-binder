@@ -4,7 +4,7 @@ dependencies:
   # Core Python
   - python=3.11.2
   - pip
-  
+
   # Data analysis
   - pandas
   - numpy
@@ -14,31 +14,31 @@ dependencies:
   - altair
   - statsmodels
   - plotnine
-  
+
   # Geospatial
   - gdal
   - fiona
   - geopandas
   - shapely
-  
+
   # Notebook & Visualization
   - notebook
   - ipywidgets
   - ipython-sql
   - jupyterlab
-  
+
   # Data processing
   - csvkit
   - lxml
   - chardet
   - openpyxl
-  
+
   # Web & APIs
   - httpie
   - requests
   - beautifulsoup4
   - selenium
-  
+
   # Pip packages
   - pip:
     - bash_kernel
@@ -55,3 +55,4 @@ dependencies:
     - strip-tags
     - pandas-profiling
     - pyarrow  # For better pandas performance
+    - nbgitpuller

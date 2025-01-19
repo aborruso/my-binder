@@ -160,6 +160,9 @@ if ! shot-scraper install -b chromium; then
     exit 1
 fi
 
+# Enable nbgitpuller
+jupyter serverextension enable --py nbgitpuller --sys-prefix
+
 # Final message
 echo "Setup completed successfully!"
 echo "Useful commands:"
