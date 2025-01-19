@@ -43,8 +43,8 @@ dependencies:
 
   # Image processing
   - imagemagick
-  
-  # Pip packages
+
+  ## Pip packages
   - pip:
     - bash_kernel
     - yq
