@@ -17,25 +17,26 @@ dependencies:
 
   # Geospatial
   - gdal=3.10.1  # Version with Parquet support
-  - pyarrow     # Arrow/Parquet library
   - fiona
   - geopandas
   - shapely
   - libgdal-arrow-parquet  # Explicit Parquet support
-  - arrow-cpp
-  - parquet-cpp
+  - arrow-cpp=14.0.1
+  - parquet-cpp=14.0.1
 
   # Notebook & Visualization
   - notebook
   - ipywidgets
   - ipython-sql
   - jupyterlab
+  - nbgitpuller>=1.1.0
 
   # Data processing
   - csvkit
   - lxml
   - chardet
   - openpyxl
+  - pyarrow=14.0.1  # Usiamo la versione compatibile con arrow-cpp
 
   # Web & APIs
   - httpie
@@ -58,5 +59,3 @@ dependencies:
     - ttok
     - strip-tags
     - pandas-profiling
-    - pyarrow  # For better pandas performance
-    - nbgitpuller>=1.1.0
