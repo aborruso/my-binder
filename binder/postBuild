@@ -73,6 +73,16 @@ if ! (cd ~/.local/bin && \
     exit 1
 fi
 
+# Install fx with error handling
+echo "Installing fx..."
+if ! (cd ~/.local/bin && \
+    wget -q https://github.com/antonmedv/fx/releases/download/22.0.0/fx-linux && \
+    mv fx-linux fx && \
+    chmod +x ./fx); then
+    echo "Failed to install fx" >&2
+    exit 1
+fi
+
 ## Install DuckDB with error handling
 echo "Installing DuckDB..."
 if ! (cd ~/.local/bin && \
