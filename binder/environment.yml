@@ -41,6 +41,9 @@ dependencies:
   - beautifulsoup4
   - selenium
 
+  # Image processing
+  - imagemagick
+  
   # Pip packages
   - pip:
     - bash_kernel
