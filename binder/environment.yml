@@ -16,11 +16,11 @@ dependencies:
   - plotnine
 
   # Geospatial
-  - gdal>=3.6.0,<4.0.0  # Use compatible version range
-  - fiona>=1.9.0
-  - geopandas>=0.14.0
-  - shapely>=2.0.0
-  - pyarrow>=14.0.1  # Use pyarrow instead of arrow-cpp/parquet-cpp
+  - gdal=3.6.2
+  - fiona=1.9.0
+  - geopandas=0.14.0
+  - shapely=2.0.1
+  - pyarrow=12.0.1  # Downgrade to stable version
 
   # Notebook & Visualization
   - notebook
@@ -34,6 +34,7 @@ dependencies:
   - lxml
   - chardet
   - openpyxl
+  - libgdal=3.6.2  # Add explicit libgdal dependency
 
   # Web & APIs
   - httpie
