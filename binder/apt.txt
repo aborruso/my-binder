@@ -22,3 +22,4 @@ libpcre3-dev
 libpcre3
 nano
 xml2
+zsh
