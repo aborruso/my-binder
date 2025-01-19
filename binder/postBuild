@@ -168,7 +168,7 @@ fi
 
 # Install frictionless with uv
 echo "Installing frictionless..."
-if ! uv pip install --python python3.11 frictionless; then
+if ! uv tool install --python python3.11; then
     echo "Failed to install frictionless" >&2
     exit 1
 fi
