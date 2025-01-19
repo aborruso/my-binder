@@ -2,6 +2,7 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aborruso/my-binder/HEAD)
 [![Docker Image Size](https://img.shields.io/docker/image-size/aborruso/data-analysis-env/latest?label=image%20size)](https://hub.docker.com/r/aborruso/data-analysis-env)
+[![Data](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/aborruso/my-binder/main?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Faborruso%252Fmy-binder-data%26urlpath%3Dlab%252Ftree%252Fmy-binder-data%252F%26branch%3Dmain)
 
 ## About this Environment
 
