@@ -21,6 +21,7 @@ dependencies:
   - fiona
   - geopandas
   - shapely
+  - libgdal-arrow-parquet  # Explicit Parquet support
 
   # Notebook & Visualization
   - notebook
