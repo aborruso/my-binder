@@ -31,8 +31,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Install core system packages
 apt-get update && apt-get install --yes \
-    libsqlite3-dev \
-    proj-data
+    libsqlite3-dev
 
 # Install Python SQLite dependencies
 pip install --user pysqlite3 sqlean.py
@@ -123,8 +122,7 @@ if [[ -z "$BINDER_OPTIMIZED" ]]; then
         safety
 fi
 
-# Install Zsh and Oh My Zsh
-apt-get update && apt-get install --yes zsh
+# Install Oh My Zsh (zsh already installed via apt.txt)
 
 # Install Oh My Zsh silently
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
