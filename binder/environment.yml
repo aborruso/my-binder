@@ -16,12 +16,12 @@ dependencies:
   - plotnine
 
   # Geospatial
-  - gdal=3.8.0
-  - fiona=1.9.0
-  - geopandas=0.14.0
-  - shapely=2.0.1
-  - pyarrow=14.0.1
-  - libgdal-arrow-parquet  # Versione automatica compatibile con GDAL
+  - gdal
+  - fiona
+  - geopandas
+  - shapely
+  - pyarrow
+  - libgdal-arrow-parquet
 
   # Notebook & Visualization
   - notebook
