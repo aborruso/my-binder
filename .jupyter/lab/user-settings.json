@@ -3,8 +3,3 @@
     "autoClose": false
   }
 }
-{
-  "@jupyterlab/terminal-extension:plugin": {
-    "autoClose": false
-  }
-}

@@ -185,7 +185,12 @@ jupyter server extension enable --py nbgitpuller --sys-prefix
 # Copy JupyterLab configuration if it exists
 mkdir -p ~/.jupyter/lab
 if [[ -f .jupyter/lab/user-settings.json ]]; then
-    cp -r .jupyter/lab/user-settings.json ~/.jupyter/lab/
+    # Check if files are different before copying
+    if ! cmp -s .jupyter/lab/user-settings.json ~/.jupyter/lab/user-settings.json; then
+        cp -v .jupyter/lab/user-settings.json ~/.jupyter/lab/
+    else
+        echo "JupyterLab settings already up to date"
+    fi
 else
     echo "No JupyterLab user settings found - using defaults"
 fi
