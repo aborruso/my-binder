@@ -76,7 +76,7 @@ fi
 # Install fx with error handling
 echo "Installing fx..."
 if ! (cd ~/.local/bin && \
-    wget -q https://github.com/antonmedv/fx/releases/download/22.0.0/fx-linux && \
+    wget -q https://github.com/antonmedv/fx/releases/download/35.0.0/fx_linux_amd64 && \
     mv fx-linux fx && \
     chmod +x ./fx); then
     echo "Failed to install fx" >&2
