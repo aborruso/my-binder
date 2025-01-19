@@ -160,8 +160,8 @@ if ! shot-scraper install -b chromium; then
     exit 1
 fi
 
-# Enable nbgitpuller
-jupyter serverextension enable --py nbgitpuller --sys-prefix
+# Enable nbgitpuller (new method for JupyterLab 3.x)
+jupyter server extension enable --py nbgitpuller --sys-prefix
 
 # Verify GDAL Parquet support
 echo "Verifying GDAL Parquet support..."

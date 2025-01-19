@@ -56,4 +56,4 @@ dependencies:
     - strip-tags
     - pandas-profiling
     - pyarrow  # For better pandas performance
-    - nbgitpuller
+    - nbgitpuller>=1.1.0
