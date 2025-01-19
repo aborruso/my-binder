@@ -165,18 +165,18 @@ fi
 # Enable nbgitpuller (new method for JupyterLab 3.x)
 jupyter server extension enable --py nbgitpuller --sys-prefix
 
-# Verify GDAL Parquet support
-echo "Verifying GDAL Parquet support..."
-if gdalinfo --formats 2>/dev/null | grep -q Parquet; then
-    echo "GDAL Parquet support confirmed"
+# Verify GDAL/OGR Parquet support
+echo "Verifying OGR Parquet support..."
+if ogrinfo --formats 2>/dev/null | grep -q Parquet; then
+    echo "OGR Parquet support confirmed"
 else
-    echo "WARNING: GDAL Parquet support not found" >&2
+    echo "WARNING: OGR Parquet support not found" >&2
     echo "Attempting to install PROJ database..."
     apt-get update && apt-get install --yes proj-data
-    if gdalinfo --formats 2>/dev/null | grep -q Parquet; then
-        echo "GDAL Parquet support confirmed after PROJ installation"
+    if ogrinfo --formats 2>/dev/null | grep -q Parquet; then
+        echo "OGR Parquet support confirmed after PROJ installation"
     else
-        echo "ERROR: GDAL Parquet support still not found" >&2
+        echo "ERROR: OGR Parquet support still not found" >&2
         echo "This may require updating GDAL/PROJ versions in environment.yml"
     fi
 fi
