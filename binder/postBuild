@@ -31,7 +31,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Install core system packages (minimal set for binder caching)
 apt-get update && apt-get install --yes \
-    libsqlite3-dev \
     htop \
     strace \
     ltrace \
