@@ -208,7 +208,7 @@ echo "set +e" >> ~/.bashrc
 echo "set +e" >> ~/.zshrc
 
 # attivare zsh di default
-echo 'exec zsh' >> ~/.bashrc
+# echo 'exec zsh' >> ~/.bashrc
 
 # Final message
 echo "Setup completed successfully!"
