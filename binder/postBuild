@@ -166,15 +166,20 @@ jupyter server extension enable --py nbgitpuller --sys-prefix
 echo "Verifying OGR Parquet support..."
 if ogrinfo --formats 2>/dev/null | grep -qi Parquet; then
     echo "OGR Parquet support confirmed"
+    echo "Testing Parquet support with sample data..."
+    wget -q https://github.com/opengeospatial/geoparquet/raw/main/examples/example.parquet
+    ogrinfo example.parquet
 else
     echo "ERROR: OGR Parquet support not found" >&2
-    echo "This may require manual intervention or environment rebuild"
+    echo "Trying to fix by reinstalling libgdal-arrow-parquet..."
+    conda install -c conda-forge libgdal-arrow-parquet -y
+    if ogrinfo --formats 2>/dev/null | grep -qi Parquet; then
+        echo "OGR Parquet support successfully fixed!"
+    else
+        echo "ERROR: Could not enable Parquet support" >&2
+        echo "This may require manual intervention or environment rebuild"
+    fi
 fi
-
-# Test Parquet support with a sample file
-echo "Testing Parquet support with sample data..."
-wget -q https://github.com/opengeospatial/geoparquet/raw/main/examples/example.parquet
-ogrinfo example.parquet
 
 # Copy JupyterLab configuration if it exists
 mkdir -p ~/.jupyter/lab

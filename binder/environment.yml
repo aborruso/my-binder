@@ -21,7 +21,7 @@ dependencies:
   - geopandas=0.14.0
   - shapely=2.0.1
   - pyarrow=14.0.1
-  - libgdal-arrow-parquet=3.8.0
+  - libgdal-arrow-parquet  # Versione automatica compatibile con GDAL
 
   # Notebook & Visualization
   - notebook
