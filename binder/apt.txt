@@ -10,7 +10,6 @@ libtool
 flex
 build-essential
 wget
-libsqlite3-dev
 zlib1g-dev
 pkg-config
 git

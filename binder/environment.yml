@@ -22,8 +22,6 @@ dependencies:
   - fiona
   - geopandas
   - shapely
-  - pyarrow
-  - libgdal-arrow-parquet
 
   # Notebook & Visualization
   - notebook

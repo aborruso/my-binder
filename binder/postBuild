@@ -41,14 +41,16 @@ apt-get update && apt-get install --yes \
     jq \
     ripgrep
 
-# Install Python SQLite dependencies (essential for binder)
-# First ensure system SQLite is properly installed
-apt-get install -y --no-install-recommends libsqlite3-dev sqlite3
-pip install --user pysqlite3 sqlean.py
-
-# Configure Python to use the latest SQLite
-echo "Reconfiguring Python SQLite bindings..."
-python3 -c "import sqlite3; print(f'SQLite version: {sqlite3.sqlite_version}')"
+# Install core system packages
+apt-get update && apt-get install --yes \
+    htop \
+    strace \
+    ltrace \
+    lsof \
+    ncdu \
+    tree \
+    jq \
+    ripgrep
 
 # Install bash kernel with better error handling and debugging
 echo "Attempting to install bash kernel..."
@@ -168,24 +170,9 @@ fi
 # Enable nbgitpuller (new method for JupyterLab 3.x)
 jupyter server extension enable --py nbgitpuller --sys-prefix
 
-# Verify GDAL/OGR Parquet support
-echo "Verifying OGR Parquet support..."
-if ogrinfo --formats 2>/dev/null | grep -qi Parquet; then
-    echo "OGR Parquet support confirmed"
-    echo "Testing Parquet support with sample data..."
-    wget -q https://github.com/opengeospatial/geoparquet/raw/main/examples/example.parquet
-    ogrinfo example.parquet
-else
-    echo "ERROR: OGR Parquet support not found" >&2
-    echo "Trying to fix by reinstalling libgdal-arrow-parquet..."
-    conda install -c conda-forge libgdal-arrow-parquet -y
-    if ogrinfo --formats 2>/dev/null | grep -qi Parquet; then
-        echo "OGR Parquet support successfully fixed!"
-    else
-        echo "ERROR: Could not enable Parquet support" >&2
-        echo "This may require manual intervention or environment rebuild"
-    fi
-fi
+# Verify GDAL installation
+echo "Verifying GDAL installation..."
+ogrinfo --version
 
 # Copy JupyterLab configuration if it exists
 mkdir -p ~/.jupyter/lab
