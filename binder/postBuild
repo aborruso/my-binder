@@ -29,8 +29,10 @@ command_exists() {
 mkdir -p ~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 
-# Install sqlite3 system package first
-apt-get update && apt-get install --yes libsqlite3-dev
+# Install core system packages
+apt-get update && apt-get install --yes \
+    libsqlite3-dev \
+    proj-data
 
 # Install Python SQLite dependencies
 pip install --user pysqlite3 sqlean.py
@@ -165,10 +167,18 @@ jupyter server extension enable --py nbgitpuller --sys-prefix
 
 # Verify GDAL Parquet support
 echo "Verifying GDAL Parquet support..."
-if gdalinfo --formats | grep -q Parquet; then
+if gdalinfo --formats 2>/dev/null | grep -q Parquet; then
     echo "GDAL Parquet support confirmed"
 else
     echo "WARNING: GDAL Parquet support not found" >&2
+    echo "Attempting to install PROJ database..."
+    apt-get update && apt-get install --yes proj-data
+    if gdalinfo --formats 2>/dev/null | grep -q Parquet; then
+        echo "GDAL Parquet support confirmed after PROJ installation"
+    else
+        echo "ERROR: GDAL Parquet support still not found" >&2
+        echo "This may require updating GDAL/PROJ versions in environment.yml"
+    fi
 fi
 
 # Final message
