@@ -126,7 +126,8 @@ pip install --user \
     bandit \
     safety
 
-# Install Oh My Zsh (zsh already installed via apt.txt)
+# Install Zsh and Oh My Zsh
+apt-get update && apt-get install --yes zsh
 
 # Install Oh My Zsh silently
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
