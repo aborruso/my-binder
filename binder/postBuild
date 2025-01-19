@@ -150,7 +150,7 @@ else
 fi
 
 # Configure JupyterLab to use zsh as default shell
-mkdir -p ~/.jupyter/lab/user-settings
+mkdir -p ~/.jupyter/lab/user-settings/@jupyterlab/terminal-extension
 cat <<EOL > ~/.jupyter/lab/user-settings/@jupyterlab/terminal-extension/plugin.jupyterlab-settings
 {
     "shell": {
