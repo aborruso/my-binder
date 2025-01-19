@@ -195,6 +195,10 @@ else
     echo "No JupyterLab user settings found - using defaults"
 fi
 
+# per disabilitare chiusura terminale all'errore
+echo "set +e" >> ~/.bashrc
+echo "set +e" >> ~/.zshrc
+
 # Final message
 echo "Setup completed successfully!"
 echo "Useful commands:"
