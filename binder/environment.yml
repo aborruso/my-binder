@@ -16,13 +16,11 @@ dependencies:
   - plotnine
 
   # Geospatial
-  - gdal=3.10.1  # Version with Parquet support
-  - fiona
-  - geopandas
-  - shapely
-  - libgdal-arrow-parquet  # Explicit Parquet support
-  - arrow-cpp=14.0.1
-  - parquet-cpp=14.0.1
+  - gdal>=3.6.0,<4.0.0  # Use compatible version range
+  - fiona>=1.9.0
+  - geopandas>=0.14.0
+  - shapely>=2.0.0
+  - pyarrow>=14.0.1  # Use pyarrow instead of arrow-cpp/parquet-cpp
 
   # Notebook & Visualization
   - notebook
@@ -36,7 +34,6 @@ dependencies:
   - lxml
   - chardet
   - openpyxl
-  - pyarrow=14.0.1  # Usiamo la versione compatibile con arrow-cpp
 
   # Web & APIs
   - httpie
