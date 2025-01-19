@@ -181,6 +181,10 @@ else
     fi
 fi
 
+# Copy JupyterLab configuration
+mkdir -p ~/.jupyter/lab
+cp -r .jupyter/lab/user-settings.json ~/.jupyter/lab/
+
 # Final message
 echo "Setup completed successfully!"
 echo "Useful commands:"
