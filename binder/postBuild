@@ -165,24 +165,13 @@ fi
 # Enable nbgitpuller (new method for JupyterLab 3.x)
 jupyter server extension enable --py nbgitpuller --sys-prefix
 
-# Verify and setup GDAL/OGR Parquet support
-echo "Setting up GDAL Parquet support..."
-conda install -c conda-forge libgdal-arrow-parquet -y
-
+# Verify GDAL/OGR Parquet support
 echo "Verifying OGR Parquet support..."
 if ogrinfo --formats 2>/dev/null | grep -qi Parquet; then
     echo "OGR Parquet support confirmed"
 else
-    echo "ERROR: OGR Parquet support not found after installation" >&2
-    echo "Attempting additional fixes..."
-    # Install PROJ database and additional dependencies via conda-forge
-    conda install -c conda-forge proj-data arrow-cpp parquet-cpp -y
-    if ogrinfo --formats 2>/dev/null | grep -qi Parquet; then
-        echo "OGR Parquet support confirmed after additional fixes"
-    else
-        echo "CRITICAL: OGR Parquet support still not found" >&2
-        echo "This may require manual intervention or environment rebuild"
-    fi
+    echo "ERROR: OGR Parquet support not found" >&2
+    echo "This may require manual intervention or environment rebuild"
 fi
 
 # Test Parquet support with a sample file
