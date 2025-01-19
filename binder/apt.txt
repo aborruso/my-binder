@@ -15,6 +15,7 @@ pkg-config
 git
 sqlite3
 libsqlite3-dev
+sqlite3
 libfreexl-dev
 enca
 libpcre3-dev
