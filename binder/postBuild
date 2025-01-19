@@ -121,20 +121,20 @@ pip install --user \
 if command -v zsh >/dev/null 2>&1; then
     echo "Installing Oh My Zsh..."
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    
+
     # Ensure .zshrc exists
     if [ ! -f ~/.zshrc ]; then
         echo "Creating .zshrc file..."
         touch ~/.zshrc
         echo "# Created by postBuild script" > ~/.zshrc
     fi
-    
+
     # Install plugins only if Oh My Zsh was installed successfully
     if [ -d ~/.oh-my-zsh ]; then
         echo "Installing Oh My Zsh plugins..."
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
         git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-        
+
         # Enable plugins in the .zshrc file
         if grep -q "plugins=" ~/.zshrc; then
             sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
@@ -181,10 +181,6 @@ fi
 
 # Enable nbgitpuller (new method for JupyterLab 3.x)
 jupyter server extension enable --py nbgitpuller --sys-prefix
-
-# Verify GDAL installation
-echo "Verifying GDAL installation..."
-ogrinfo --version
 
 # Copy JupyterLab configuration if it exists
 mkdir -p ~/.jupyter/lab
