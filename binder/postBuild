@@ -166,6 +166,13 @@ if ! curl -LsSf https://astral.sh/uv/install.sh | sh; then
     exit 1
 fi
 
+# Install frictionless with uv
+echo "Installing frictionless..."
+if ! ~/.cargo/bin/uv pip install --python python3.11 frictionless; then
+    echo "Failed to install frictionless" >&2
+    exit 1
+fi
+
 # Install llm plugins with error handling
 echo "Installing llm plugins..."
 if ! (llm install llm-groq && llm install llm-mistral); then

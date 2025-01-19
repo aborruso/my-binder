@@ -59,4 +59,3 @@ dependencies:
     - ttok
     - strip-tags
     - pandas-profiling
-    - frictionless
