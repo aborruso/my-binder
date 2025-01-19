@@ -190,9 +190,13 @@ echo "Testing Parquet support with sample data..."
 wget -q https://github.com/opengeospatial/geoparquet/raw/main/examples/example.parquet
 ogrinfo example.parquet
 
-# Copy JupyterLab configuration
+# Copy JupyterLab configuration if it exists
 mkdir -p ~/.jupyter/lab
-cp -r .jupyter/lab/user-settings.json ~/.jupyter/lab/
+if [[ -f .jupyter/lab/user-settings.json ]]; then
+    cp -r .jupyter/lab/user-settings.json ~/.jupyter/lab/
+else
+    echo "No JupyterLab user settings found - using defaults"
+fi
 
 # Final message
 echo "Setup completed successfully!"
