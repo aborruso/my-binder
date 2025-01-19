@@ -29,11 +29,19 @@ command_exists() {
 mkdir -p ~/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 
-# Install core system packages
+# Install core system packages (minimal set for binder caching)
 apt-get update && apt-get install --yes \
-    libsqlite3-dev
+    libsqlite3-dev \
+    htop \
+    strace \
+    ltrace \
+    lsof \
+    ncdu \
+    tree \
+    jq \
+    ripgrep
 
-# Install Python SQLite dependencies
+# Install Python SQLite dependencies (essential for binder)
 pip install --user pysqlite3 sqlean.py
 
 # Install bash kernel with better error handling and debugging
@@ -51,17 +59,6 @@ else
     fi
 fi
 
-# Install core tools that rarely change first
-echo "Installing core tools..."
-apt-get update && apt-get install --yes \
-    htop \
-    strace \
-    ltrace \
-    lsof \
-    ncdu \
-    tree \
-    jq \
-    ripgrep
 
 
 # Install Miller with error handling
@@ -109,18 +106,16 @@ then
     exit 1
 fi
 
-# Install code quality tools (move to end if on mybinder.org)
-if [[ -z "$BINDER_OPTIMIZED" ]]; then
-    echo "Installing code quality tools..."
-    pip install --user \
-        black \
-        isort \
-        flake8 \
-        mypy \
-        pylint \
-        bandit \
-        safety
-fi
+# Install code quality tools (moved to end for binder optimization)
+echo "Installing code quality tools..."
+pip install --user \
+    black \
+    isort \
+    flake8 \
+    mypy \
+    pylint \
+    bandit \
+    safety
 
 # Install Oh My Zsh (zsh already installed via apt.txt)
 
@@ -139,11 +134,15 @@ sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions
 
 # You can start zsh manually later, or add a note to users to run 'zsh' in the terminal.
 
-# Install uv with error handling
-echo "Installing uv..."
-if ! curl -LsSf https://astral.sh/uv/install.sh | sh; then
-    echo "Failed to install uv" >&2
-    exit 1
+# Install uv with error handling (moved to end for binder optimization)
+if [[ "$BINDER_OPTIMIZED" == "false" ]]; then
+    echo "Installing uv..."
+    if ! curl -LsSf https://astral.sh/uv/install.sh | sh; then
+        echo "Failed to install uv" >&2
+        exit 1
+    fi
+else
+    echo "Skipping uv installation on binder for optimization"
 fi
 
 # Install llm plugins with error handling
