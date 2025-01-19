@@ -16,7 +16,8 @@ dependencies:
   - plotnine
 
   # Geospatial
-  - gdal
+  - gdal=3.8.0  # Version with Parquet support
+  - pyarrow     # Arrow/Parquet library
   - fiona
   - geopandas
   - shapely

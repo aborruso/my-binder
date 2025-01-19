@@ -163,6 +163,14 @@ fi
 # Enable nbgitpuller
 jupyter serverextension enable --py nbgitpuller --sys-prefix
 
+# Verify GDAL Parquet support
+echo "Verifying GDAL Parquet support..."
+if gdalinfo --formats | grep -q Parquet; then
+    echo "GDAL Parquet support confirmed"
+else
+    echo "WARNING: GDAL Parquet support not found" >&2
+fi
+
 # Final message
 echo "Setup completed successfully!"
 echo "Useful commands:"
