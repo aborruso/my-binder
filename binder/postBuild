@@ -42,7 +42,13 @@ apt-get update && apt-get install --yes \
     ripgrep
 
 # Install Python SQLite dependencies (essential for binder)
+# First ensure system SQLite is properly installed
+apt-get install -y --no-install-recommends libsqlite3-dev sqlite3
 pip install --user pysqlite3 sqlean.py
+
+# Configure Python to use the latest SQLite
+echo "Reconfiguring Python SQLite bindings..."
+python3 -c "import sqlite3; print(f'SQLite version: {sqlite3.sqlite_version}')"
 
 # Install bash kernel with better error handling and debugging
 echo "Attempting to install bash kernel..."

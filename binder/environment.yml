@@ -4,6 +4,8 @@ dependencies:
   # Core Python
   - python=3.11.2
   - pip
+  - sqlite=3.45.1
+  - pysqlite3-binary
 
   # Data analysis
   - pandas
