@@ -154,15 +154,11 @@ fi
 
 # You can start zsh manually later, or add a note to users to run 'zsh' in the terminal.
 
-# Install uv with error handling (moved to end for binder optimization)
-if [[ "$BINDER_OPTIMIZED" == "false" ]]; then
-    echo "Installing uv..."
-    if ! curl -LsSf https://astral.sh/uv/install.sh | sh; then
-        echo "Failed to install uv" >&2
-        exit 1
-    fi
-else
-    echo "Skipping uv installation on binder for optimization"
+# Install uv with error handling
+echo "Installing uv..."
+if ! curl -LsSf https://astral.sh/uv/install.sh | sh; then
+    echo "Failed to install uv" >&2
+    exit 1
 fi
 
 # Install llm plugins with error handling
