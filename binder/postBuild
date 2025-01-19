@@ -149,10 +149,15 @@ else
     exit 1
 fi
 
-# set zsh as default shell
-# chsh -s /path/to/zsh
-
-# You can start zsh manually later, or add a note to users to run 'zsh' in the terminal.
+# Configure JupyterLab to use zsh as default shell
+mkdir -p ~/.jupyter/lab/user-settings
+cat <<EOL > ~/.jupyter/lab/user-settings/@jupyterlab/terminal-extension/plugin.jupyterlab-settings
+{
+    "shell": {
+        "linux": "/bin/zsh"
+    }
+}
+EOL
 
 # Install uv with error handling
 echo "Installing uv..."
