@@ -175,8 +175,8 @@ if ogrinfo --formats 2>/dev/null | grep -qi Parquet; then
 else
     echo "ERROR: OGR Parquet support not found after installation" >&2
     echo "Attempting additional fixes..."
-    # Install PROJ database and additional dependencies
-    apt-get update && apt-get install --yes proj-data libarrow-dev libparquet-dev
+    # Install PROJ database and additional dependencies via conda-forge
+    conda install -c conda-forge proj-data arrow-cpp parquet-cpp -y
     if ogrinfo --formats 2>/dev/null | grep -qi Parquet; then
         echo "OGR Parquet support confirmed after additional fixes"
     else

@@ -22,6 +22,8 @@ dependencies:
   - geopandas
   - shapely
   - libgdal-arrow-parquet  # Explicit Parquet support
+  - arrow-cpp
+  - parquet-cpp
 
   # Notebook & Visualization
   - notebook
