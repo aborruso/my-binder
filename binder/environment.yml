@@ -10,8 +10,6 @@ dependencies:
   - pandas
   - numpy
   - scipy
-  - duckdb
-  - polars
   - matplotlib
   - seaborn
   - altair
@@ -61,3 +59,5 @@ dependencies:
     - ttok
     - strip-tags
     - pandas-profiling
+    - duckdb
+    - polars
