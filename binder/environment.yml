@@ -10,6 +10,7 @@ dependencies:
   - pandas
   - numpy
   - scipy
+  - duckdb
   - matplotlib
   - seaborn
   - altair
@@ -59,3 +60,4 @@ dependencies:
     - ttok
     - strip-tags
     - pandas-profiling
+    - duckdb-engine
