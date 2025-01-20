@@ -60,4 +60,3 @@ dependencies:
     - ttok
     - strip-tags
     - pandas-profiling
-    - duckdb-engine
